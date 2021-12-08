@@ -23,6 +23,16 @@
             ],
             "cwd": "${workspaceFolder}\\05",
             "program": "${workspaceFolder}\\05\\app.js"
+        },
+        {
+            "type": "pwa-node",
+            "request": "launch",
+            "name": "Launch day 7",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "cwd": "${workspaceFolder}\\07",
+            "program": "${workspaceFolder}\\07\\app.js"
         }
     ]
 }
