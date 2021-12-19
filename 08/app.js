@@ -1,6 +1,6 @@
 const fs = require('fs');
 const assert = require('assert');
-const arrayUtils = require('../array-utils');
+const arrayUtils = require('../common/array-utils');
 
 const parseInput = (fileName) => {
     return fs.readFileSync(fileName, 'utf-8')
