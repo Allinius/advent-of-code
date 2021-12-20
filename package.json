@@ -1,0 +1,11 @@
+{
+  "name": "advent-of-code-2021",
+  "version": "1.0.0",
+  "description": "my solutions for Advent of Code 2021 (adventofcode.com)",
+  "scripts": {
+  },
+  "author": "Allinius",
+  "dependencies": {
+    "pureimage": "^0.3.8"
+  }
+}
