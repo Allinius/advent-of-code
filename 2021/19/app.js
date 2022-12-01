@@ -1,6 +1,6 @@
 const fs = require('fs');
-const arrayUtils = require('../common/array-utils');
-const vec3d = require('../common/vec3d');
+const arrayUtils = require('../../common/array-utils');
+const vec3d = require('../../common/vec3d');
 
 const parseInput = (fileName) => {
     return fs.readFileSync(fileName, 'utf8').split('\n\n').map((scannerInput) => 
