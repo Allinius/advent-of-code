@@ -2,7 +2,7 @@ const fs = require('fs');
 const PImage = require('pureimage');
 
 const parseInput = (fileName) => {
-    const parts = fs.readFileSync(fileName, 'utf8').split('\n\n');
+    const parts = fs.readFileSync(fileName, 'utf8').replace(/\r/g, "").split('\n\n');
     const image = parts[1].split('\n').map(l => l.split(''));
     return {
         algorithm: parts[0],

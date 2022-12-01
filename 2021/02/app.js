@@ -8,8 +8,8 @@ const parseInputLine = (line) => {
     }
 }
 
-const smallInput = fs.readFileSync('input-small.txt', 'utf-8').split('\n').map(parseInputLine);
-const input = fs.readFileSync('input.txt', 'utf-8').split('\n').map(parseInputLine);
+const smallInput = fs.readFileSync('input-small.txt', 'utf-8').replace(/\r/g, "").split('\n').map(parseInputLine);
+const input = fs.readFileSync('input.txt', 'utf-8').replace(/\r/g, "").split('\n').map(parseInputLine);
 
 const partOne = (instructions) => {
     const position = {x: 0, y: 0};

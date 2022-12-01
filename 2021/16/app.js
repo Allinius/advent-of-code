@@ -1,7 +1,7 @@
 const fs = require('fs');
 
-const inputSmall = fs.readFileSync('input-small.txt', 'utf8').split('').map(c => parseInt(c, 16).toString(2).padStart(4, '0')).join('').split('');
-const input = fs.readFileSync('input.txt', 'utf8').split('').map(c => parseInt(c, 16).toString(2).padStart(4, '0')).join('').split('');
+const inputSmall = fs.readFileSync('input-small.txt', 'utf8').replace(/\r/g, "").split('').map(c => parseInt(c, 16).toString(2).padStart(4, '0')).join('').split('');
+const input = fs.readFileSync('input.txt', 'utf8').replace(/\r/g, "").split('').map(c => parseInt(c, 16).toString(2).padStart(4, '0')).join('').split('');
 
 const parsePackets = (packetBits) => {
     const version = parseInt(packetBits.splice(0, 3).join(''), 2);

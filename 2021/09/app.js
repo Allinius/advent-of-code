@@ -1,7 +1,7 @@
 const fs = require('fs');
 
-const smallInput = fs.readFileSync('input-small.txt', 'utf-8').split('\n').map(l => l.split('').map(n => parseInt(n)));
-const input = fs.readFileSync('input.txt', 'utf-8').split('\n').map(l => l.split('').map(n => parseInt(n)));
+const smallInput = fs.readFileSync('input-small.txt', 'utf-8').replace(/\r/g, "").split('\n').map(l => l.split('').map(n => parseInt(n)));
+const input = fs.readFileSync('input.txt', 'utf-8').replace(/\r/g, "").split('\n').map(l => l.split('').map(n => parseInt(n)));
 
 const partOne = (map) => {
     const lowPoints = [];

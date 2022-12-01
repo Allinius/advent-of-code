@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 const parseInput = (fileName) => {
-    const parts = fs.readFileSync(fileName, 'utf-8').split('\n\n').map(part => part.split('\n'));
+    const parts = fs.readFileSync(fileName, 'utf-8').replace(/\r/g, "").split('\n\n').map(part => part.split('\n'));
     const coords = parts[0].map(p => {
         const coordParts = p.split(',');
         return { x: parseInt(coordParts[0]), y: parseInt(coordParts[1]) };

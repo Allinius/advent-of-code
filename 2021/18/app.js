@@ -1,7 +1,7 @@
 const fs = require('fs');
 
-const mediumInput = fs.readFileSync('input-medium.txt', 'utf8').split('\n');
-const input = fs.readFileSync('input.txt', 'utf8').split('\n');
+const mediumInput = fs.readFileSync('input-medium.txt', 'utf8').replace(/\r/g, "").split('\n');
+const input = fs.readFileSync('input.txt', 'utf8').replace(/\r/g, "").split('\n');
 
 
 const mapArrayToNode = (arr, parent = null, depth = 0, type = 'root') => {

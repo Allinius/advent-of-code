@@ -1,7 +1,7 @@
 const fs = require('fs');
 
-const smallInput = fs.readFileSync('input-small.txt', 'utf-8').split('\n');
-const input = fs.readFileSync('input.txt', 'utf-8').split('\n');
+const smallInput = fs.readFileSync('input-small.txt', 'utf-8').replace(/\r/g, "").split('\n');
+const input = fs.readFileSync('input.txt', 'utf-8').replace(/\r/g, "").split('\n');
 
 const solve = (lines) => {
     const partOneScores = {

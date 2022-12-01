@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const input = fs.readFileSync('input.txt', 'utf-8').split(',').map(n => parseInt(n)).sort((a,b)=>a-b);
+const input = fs.readFileSync('input.txt', 'utf-8').replace(/\r/g, "").split(',').map(n => parseInt(n)).sort((a,b)=>a-b);
 
 const partOne = (positions) => {
     const position = positions[positions.length/2];

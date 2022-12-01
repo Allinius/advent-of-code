@@ -2,7 +2,7 @@ const { log } = require('console');
 const fs = require('fs');
 
 const parseInput = (fileName) => {
-    return fs.readFileSync(fileName, 'utf8').split('\n').map(line => {
+    return fs.readFileSync(fileName, 'utf8').replace(/\r/g, "").split('\n').map(line => {
         const parts = line.split(' ')
         return {
             op: parts[0],

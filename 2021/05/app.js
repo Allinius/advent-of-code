@@ -2,7 +2,7 @@ const fs = require('fs');
 
 const ARRAY_ROW_COUNT = 1000;
 
-const input = fs.readFileSync('input.txt', 'utf-8').split('\n').map(l => l.split(' -> ').map(c => {
+const input = fs.readFileSync('input.txt', 'utf-8').replace(/\r/g, "").split('\n').map(l => l.split(' -> ').map(c => {
     const parts = c.split(',');
     return {
         x: parseInt(parts[0]),

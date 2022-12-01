@@ -1,6 +1,7 @@
 const fs = require('fs');
 
 const input = fs.readFileSync('input.txt', 'utf-8')
+    .replace(/\r/g, "")
     .split('\n')
     .map((l, y) => 
         l.split('').map((s, x) => ({

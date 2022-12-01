@@ -32,7 +32,7 @@ class Cuboid {
 }
 
 const parseInput = (fileName) => {
-    return fs.readFileSync(fileName, 'utf8').split('\n').map(line => {
+    return fs.readFileSync(fileName, 'utf8').replace(/\r/g, "").split('\n').map(line => {
         const [state, coordPart] = line.split(' ');
         const sign = state === 'on' ? 1 : -1;
         const coords = coordPart.split(',').map(c => 

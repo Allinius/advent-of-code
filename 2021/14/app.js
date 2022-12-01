@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 const parseInput = (fileName) => {
-    const input = fs.readFileSync(fileName, 'utf-8').split('\n\n');
+    const input = fs.readFileSync(fileName, 'utf-8').replace(/\r/g, "").split('\n\n');
     const polymer = input[0];
     const rules = input[1].split('\n').reduce((acc, line) => {
         const parts = line.split(' -> ');

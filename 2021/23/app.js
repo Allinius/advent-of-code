@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 const parseInput = (fileName) => {
-    const a = fs.readFileSync(fileName, 'utf8').split('\n').map((line, y) => 
+    const a = fs.readFileSync(fileName, 'utf8').replace(/\r/g, "").split('\n').map((line, y) => 
         line.split('').flatMap(c => 
             c === 'A' || c === 'B' || c === 'C' || c === 'D' ? c : []
         )

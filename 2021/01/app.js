@@ -1,7 +1,7 @@
 const fs = require('fs');
 
-const smallInput = fs.readFileSync('input-small.txt', 'utf-8').split('\n').map(s => parseInt(s));
-const input = fs.readFileSync('input.txt', 'utf-8').split('\n').map(s => parseInt(s));
+const smallInput = fs.readFileSync('input-small.txt', 'utf-8').replace(/\r/g, "").split('\n').map(s => parseInt(s));
+const input = fs.readFileSync('input.txt', 'utf-8').replace(/\r/g, "").split('\n').map(s => parseInt(s));
 
 
 const partOne = (depths) => {

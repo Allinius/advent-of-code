@@ -1,7 +1,7 @@
 const fs = require('fs');
 
-const smallInput = fs.readFileSync('input-small.txt', 'utf-8').split('\n').map(s => s.split('').map(b => parseInt(b)));
-const input = fs.readFileSync('input.txt', 'utf-8').split('\n').map(s => s.split('').map(b => parseInt(b)));
+const smallInput = fs.readFileSync('input-small.txt', 'utf-8').replace(/\r/g, "").split('\n').map(s => s.split('').map(b => parseInt(b)));
+const input = fs.readFileSync('input.txt', 'utf-8').replace(/\r/g, "").split('\n').map(s => s.split('').map(b => parseInt(b)));
 
 const countMajorityBitColumn = (binNums, colIndex) => {
     const halfCount = binNums.length / 2;

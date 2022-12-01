@@ -4,6 +4,7 @@ const arrayUtils = require('../../common/array-utils');
 
 const parseInput = (fileName) => {
     return fs.readFileSync(fileName, 'utf-8')
+        .replace(/\r/g, "")
         .split('\n')
         .map(d => d.split(' | ')
             .map(c => c.split(' ')

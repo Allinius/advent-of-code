@@ -1,12 +1,12 @@
 const fs = require('fs');
 
 const inputSmall = fs.readFileSync('input-small.txt', 'utf-8')
-    .split('\n').map((l, y) => 
+    .replace(/\r/g, "").split('\n').map((l, y) => 
         l.split('').map((n, x) => ({ x, y, risk: parseInt(n) })
     )
 );
 const input = fs.readFileSync('input.txt', 'utf-8')
-    .split('\n').map((l, y) => 
+    .replace(/\r/g, "").split('\n').map((l, y) => 
         l.split('').map((n, x) => ({ x, y, risk: parseInt(n) })
     )
 );

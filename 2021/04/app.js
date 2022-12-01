@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const input = fs.readFileSync('input.txt', 'utf-8').split('\n\n');
+const input = fs.readFileSync('input.txt', 'utf-8').replace(/\r/g, "").split('\n\n');
 const numbers = input.splice(0,1)[0].split(',').map(n => parseInt(n));
 const boards = input.map(b => b.split('\n'));
 boards.forEach(board => {
