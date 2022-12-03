@@ -6,6 +6,14 @@ const intersection = (array1, array2) => {
     return array1.filter((e) => array2.includes(e));
 };
 
+const intersectionMulti = (...arrays) => {
+    return arrays[0].filter((e) =>
+        arrays
+            .slice(1)
+            .reduce((isCommon, arr) => isCommon && arr.includes(e), true)
+    );
+};
+
 const union = (array1, array2) => {
     return [...array1, ...array2];
 };
@@ -37,6 +45,7 @@ const simpleIdentity = (array1, array2) => {
 module.exports = {
     difference,
     intersection,
+    intersectionMulti,
     union,
     permutate,
     simpleIdentity,
