@@ -1,6 +1,6 @@
 const fs = require('fs');
 const assert = require('assert');
-const drawImage = require('../../common/image-utils').drawImage;
+const { drawImage } = require('../../common/image-utils');
 
 const parseInput = (fileName) => {
     let xMin = Number.MAX_SAFE_INTEGER;

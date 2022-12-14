@@ -1,9 +1,9 @@
+const { createCanvas } = require('canvas');
 const fs = require('fs');
-const PImage = require('pureimage');
 
 const drawImage = (image, zoom = 1, palette, fileName = 'out.png') => {
-    const img = PImage.make(zoom * image[0].length, zoom * image.length);
-    const ctx = img.getContext('2d');
+    const canvas = createCanvas(zoom * image[0].length, zoom * image.length);
+    const ctx = canvas.getContext('2d');
     ctx.fillStyle = 'rgba(0,0,0,1)';
     ctx.fillRect(0, 0, zoom * image[0].length, zoom * image.length);
 
@@ -18,13 +18,10 @@ const drawImage = (image, zoom = 1, palette, fileName = 'out.png') => {
             }
         })
     );
-    return PImage.encodePNGToStream(img, fs.createWriteStream(fileName))
-        .then(() => {
-            console.log('wrote out the png file to ' + fileName);
-        })
-        .catch((e) => {
-            console.log('there was an error writing');
-        });
+
+    const buffer = canvas.toBuffer('image/png');
+    fs.writeFileSync(fileName, buffer);
+    console.log('wrote out the png file to ' + fileName);
 };
 
 module.exports = {
