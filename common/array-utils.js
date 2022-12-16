@@ -38,6 +38,23 @@ const permutate = (inputArr) => {
     return result;
 };
 
+function combinate(elements, length) {
+    if (length === 0) {
+        return [[]];
+    }
+
+    let combinations = [];
+    for (let i = 0; i < elements.length; i++) {
+        let element = elements[i];
+        let subcombinations = combinate(elements.slice(i + 1), length - 1);
+        subcombinations.forEach((combination) => {
+            combinations.push([element, ...combination]);
+        });
+    }
+
+    return combinations;
+}
+
 const simpleIdentity = (array1, array2) => {
     return array1.sort().join(',') === array2.sort().join(',');
 };
@@ -48,5 +65,6 @@ module.exports = {
     intersectionMulti,
     union,
     permutate,
+    combinate,
     simpleIdentity,
 };
