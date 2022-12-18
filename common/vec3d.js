@@ -18,6 +18,10 @@ const eq = (vec1, vec2) => {
     return vec1.x === vec2.x && vec1.y === vec2.y && vec1.z === vec2.z;
 };
 
+const magnitude = (vec) => {
+    return Math.sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z);
+};
+
 const manhattanDistance = (vec1, vec2) => {
     return (
         Math.abs(vec2.x - vec1.x) +
@@ -66,6 +70,7 @@ module.exports = {
     difference,
     add,
     eq,
+    magnitude,
     manhattanDistance,
     rotate,
 };
