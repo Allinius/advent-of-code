@@ -31,7 +31,12 @@ const intervalIntersection = (intervals) => {
     return result;
 };
 
+const positiveModulo = (number, n) => {
+    return ((number % n) + n) % n;
+};
+
 module.exports = {
     intervalUnion,
     intervalIntersection,
+    positiveModulo,
 };
