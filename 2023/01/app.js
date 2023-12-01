@@ -67,8 +67,42 @@ partTwo = (values) => {
     }, 0);
 };
 
+partTwoRegex = (values) => {
+    const nameStrings = [
+        'one',
+        'two',
+        'three',
+        'four',
+        'five',
+        'six',
+        'seven',
+        'eight',
+        'nine',
+    ];
+    const firstRegex = new RegExp(`\\d|${nameStrings.join('|')}`);
+    const lastRegex = new RegExp(
+        `\\d|${nameStrings
+            .map((n) => n.split('').reverse().join(''))
+            .join('|')}`
+    );
+    return values.reduce((sum, value) => {
+        let first = firstRegex.exec(value);
+        let last = lastRegex.exec(value.split('').reverse().join(''));
+        const firstNum =
+            first[0].length === 1
+                ? first[0]
+                : nameStrings.indexOf(first[0]) + 1;
+        const lastNum =
+            last[0].length === 1
+                ? last[0]
+                : nameStrings.indexOf(last[0].split('').reverse().join('')) + 1;
+        return sum + Number.parseInt('' + firstNum + lastNum);
+    }, 0);
+};
+
 assert.equal(partOne(inputSmall), 142);
 console.log(partOne(input));
 
 assert.equal(partTwo(inputSmall2), 281);
-console.log(partTwo(input));
+assert.equal(partTwoRegex(inputSmall2), 281);
+console.log(partTwoRegex(input));
