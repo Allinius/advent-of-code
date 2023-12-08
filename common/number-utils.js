@@ -35,8 +35,37 @@ const positiveModulo = (number, n) => {
     return ((number % n) + n) % n;
 };
 
+const GCD = (a, b) => {
+    if (b === 0) {
+        return a;
+    } else {
+        return GCD(b, a % b);
+    }
+};
+const LCM = (a, b) => {
+    return (a * b) / GCD(a, b);
+};
+
+// Calculate LCM for an array of numbers
+const arrayLCM = (numbers) => {
+    if (numbers.length === 0) {
+        return null;
+    } else if (numbers.length === 1) {
+        return numbers[0];
+    } else {
+        let lcm = numbers[0];
+        for (let i = 1; i < numbers.length; i++) {
+            lcm = LCM(lcm, numbers[i]);
+        }
+        return lcm;
+    }
+};
+
 module.exports = {
     intervalUnion,
     intervalIntersection,
     positiveModulo,
+    GCD,
+    LCM,
+    arrayLCM,
 };
