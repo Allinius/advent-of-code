@@ -1,6 +1,7 @@
 const fs = require('fs');
 const assert = require('assert');
 const AreaMap2D = require('../../common/area-map-2d');
+const { drawImage } = require('../../common/image-utils');
 
 const parseInput = (fileName) => {
     return new AreaMap2D(
@@ -173,39 +174,39 @@ const getBigCell = (cell) => {
     switch (cell) {
         case '|':
             return [
-                ['.', '#', '.'],
-                ['.', '#', '.'],
-                ['.', '#', '.'],
+                ['-', '#', '-'],
+                ['-', '#', '-'],
+                ['-', '#', '-'],
             ];
         case '-':
             return [
-                ['.', '.', '.'],
+                ['-', '-', '-'],
                 ['#', '#', '#'],
-                ['.', '.', '.'],
+                ['-', '-', '-'],
             ];
         case 'L':
             return [
-                ['.', '#', '.'],
-                ['.', '#', '#'],
-                ['.', '.', '.'],
+                ['-', '#', '-'],
+                ['-', '#', '#'],
+                ['-', '-', '-'],
             ];
         case 'J':
             return [
-                ['.', '#', '.'],
-                ['#', '#', '.'],
-                ['.', '.', '.'],
+                ['-', '#', '-'],
+                ['#', '#', '-'],
+                ['-', '-', '-'],
             ];
         case '7':
             return [
-                ['.', '.', '.'],
-                ['#', '#', '.'],
-                ['.', '#', '.'],
+                ['-', '-', '-'],
+                ['#', '#', '-'],
+                ['-', '#', '-'],
             ];
         case 'F':
             return [
-                ['.', '.', '.'],
-                ['.', '#', '#'],
-                ['.', '#', '.'],
+                ['-', '-', '-'],
+                ['-', '#', '#'],
+                ['-', '#', '-'],
             ];
         case '.':
             return [
@@ -216,28 +217,44 @@ const getBigCell = (cell) => {
     }
 };
 
-const floodFillFrom = (areaMap, x, y, fillSymbnol) => {
-    // const areaMap = new AreaMap2D(map);
+let outCount = 0;
+const floodFillFrom = (areaMap, x, y, fillSymbnol, shouldDraw) => {
     let open = [JSON.stringify({ x, y })];
     while (open.length > 0) {
         const newOpen = new Set();
         open.forEach((posString) => {
             const pos = JSON.parse(posString);
-            areaMap.map[pos.y][pos.x] = fillSymbnol;
+            areaMap.map[pos.y][pos.x] += fillSymbnol;
             areaMap
                 .getSurrounding(pos.x, pos.y)
-                .filter((cell) => cell.value === '.')
+                .filter((cell) => cell.value === '.' || cell.value === '-')
                 .map((cell) => JSON.stringify(cell))
                 .forEach((cell) => newOpen.add(cell));
         });
         open = Array.from(newOpen);
+        if (shouldDraw) {
+            drawImage(
+                areaMap.map,
+                2,
+                {
+                    '.0': 'rgba(179, 81, 255, 1)',
+                    '-0': 'rgba(120, 0, 214, 1)',
+                    '.1': 'rgba(225, 255, 126, 1)',
+                    '-1': 'rgba(119, 154, 0, 1)',
+                    '#': 'rgba(0, 0, 0, 1)',
+                    '-': 'rgba(64, 64, 64, 1)',
+                    '.': 'rgba(128, 128, 128, 1)',
+                },
+                `out/${('' + outCount++).padStart(5, '0')}.png`
+            );
+        }
     }
 };
 
 const isCellInside = (bigMap, x, y) => {
     const insideLines = bigMap
         .slice(y, y + 3)
-        .filter((line) => line.slice(x, x + 3).toString() === '1,1,1');
+        .filter((line) => line.slice(x, x + 3).toString() === '.1,.1,.1');
 
     return insideLines && insideLines.length === 3;
 };
