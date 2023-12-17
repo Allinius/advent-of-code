@@ -5,6 +5,7 @@
   "scripts": {},
   "author": "Allinius",
   "dependencies": {
-    "canvas": "^2.10.2"
+    "canvas": "^2.11.2",
+    "heap": "^0.2.7"
   }
 }

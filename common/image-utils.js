@@ -4,6 +4,7 @@ const fs = require('fs');
 const drawImage = (image, zoom = 1, palette, fileName = 'out.png') => {
     const canvas = createCanvas(zoom * image[0].length, zoom * image.length);
     const ctx = canvas.getContext('2d');
+    ctx.font = `bold ${zoom + 1}px monospace`;
     ctx.fillStyle = 'rgba(0,0,0,1)';
     ctx.fillRect(0, 0, zoom * image[0].length, zoom * image.length);
 
@@ -12,6 +13,10 @@ const drawImage = (image, zoom = 1, palette, fileName = 'out.png') => {
             if (palette && palette[pixel]) {
                 ctx.fillStyle = palette[pixel];
                 ctx.fillRect(zoom * x, zoom * y, zoom, zoom);
+                if (palette.drawText) {
+                    ctx.fillStyle = 'rgba(125,255,255,1)';
+                    ctx.fillText(pixel, zoom * x, zoom * (y + 1));
+                }
             } else if (pixel === '#') {
                 ctx.fillStyle = 'rgba(255,255,255,1)';
                 ctx.fillRect(zoom * x, zoom * y, zoom, zoom);
