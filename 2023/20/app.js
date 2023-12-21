@@ -1,7 +1,6 @@
 const fs = require('fs');
 const assert = require('assert');
-const { positiveModulo, arrayLCM } = require('../../common/number-utils');
-const { encode } = require('punycode');
+const { arrayLCM } = require('../../common/number-utils');
 
 const parseInput = (fileName) => {
     return fs
