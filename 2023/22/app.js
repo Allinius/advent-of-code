@@ -1,8 +1,5 @@
 const fs = require('fs');
 const assert = require('assert');
-const AreaMap2D = require('../../common/area-map-2d');
-const { positiveModulo } = require('../../common/number-utils');
-const { drawImage } = require('../../common/image-utils');
 
 const parseInput = (fileName) => {
     return fs
