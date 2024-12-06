@@ -1,6 +1,5 @@
 const fs = require('fs');
 const assert = require('assert');
-const vec2d = require('../../common/vec2d');
 
 const parseInput = (fileName) => {
     const [rulesPart, ordersPart] = fs
