@@ -23,12 +23,12 @@ const getPossibleResults = (numbers, doConcat = false) => {
         return numbers;
     }
 
-    const results = getPossibleResults(numbers.slice(1), doConcat);
+    const results = getPossibleResults(numbers.slice(0, -1), doConcat);
     return results.reduce((acc, partialResult) => {
-        acc.push(numbers[0] + partialResult);
-        acc.push(numbers[0] * partialResult);
+        acc.push(partialResult + numbers[numbers.length - 1]);
+        acc.push(partialResult * numbers[numbers.length - 1]);
         if (doConcat) {
-            acc.push(Number(`${partialResult}${numbers[0]}`));
+            acc.push(Number(`${partialResult}${numbers[numbers.length - 1]}`));
         }
         return acc;
     }, []);
@@ -36,10 +36,7 @@ const getPossibleResults = (numbers, doConcat = false) => {
 
 const sumValidResults = (equations, doConcat = false) => {
     return equations.reduce((acc, equation) => {
-        const results = getPossibleResults(
-            equation.numbers.toReversed(),
-            doConcat
-        );
+        const results = getPossibleResults(equation.numbers, doConcat);
         if (results.indexOf(equation.result) >= 0) {
             return acc + equation.result;
         }
