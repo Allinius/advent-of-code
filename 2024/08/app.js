@@ -60,9 +60,7 @@ const countAntennas = (map, maxSteps = 1, includeStarts = false) => {
                         newPos.y < map.length
                     ) {
                         const key = `${newPos.x}_${newPos.y}`;
-                        if (!antibodies.has(key)) {
-                            antibodies.set(key, newPos);
-                        }
+                        antibodies.set(key, newPos);
                         newPos = direction.transform(newPos, diff);
                     }
                 });

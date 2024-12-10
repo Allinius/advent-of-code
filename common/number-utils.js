@@ -61,6 +61,18 @@ const arrayLCM = (numbers) => {
     }
 };
 
+const sumFromTo = (from, to) => {
+    if (from > to) {
+        [from, to] = [to, from];
+    }
+    const diff = to - from;
+    if (diff % 2 === 0) {
+        return (diff + 1) * (from + diff / 2);
+    } else {
+        return diff * (from + Math.floor(diff / 2)) + to;
+    }
+};
+
 module.exports = {
     intervalUnion,
     intervalIntersection,
@@ -68,4 +80,5 @@ module.exports = {
     GCD,
     LCM,
     arrayLCM,
+    sumFromTo,
 };
