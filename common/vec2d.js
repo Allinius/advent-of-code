@@ -12,7 +12,15 @@ const difference = (vec1, vec2) => {
     };
 };
 
+const scalarMultiply = (vec, n) => {
+    return {
+        x: vec.x * n,
+        y: vec.y * n,
+    };
+};
+
 module.exports = {
     add,
     difference,
+    scalarMultiply,
 };
