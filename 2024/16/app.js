@@ -2,7 +2,7 @@ const fs = require('fs');
 const assert = require('assert');
 const vec2d = require('../../common/vec2d');
 const { positiveModulo } = require('../../common/number-utils');
-const { drawImage } = require('../../common/image-utils');
+const { MinPriorityQueue } = require('@datastructures-js/priority-queue');
 
 const parseInput = (fileName) => {
     return fs
@@ -49,26 +49,34 @@ const partOne = (inputMap) => {
         })
     );
 
-    const opened = [
-        {
-            position: startPos,
-            dirIndex: 1,
-            pathScore: 0,
-            path: [],
-        },
-    ];
+    const opened = new MinPriorityQueue((state) => state.pathScore);
+    opened.enqueue({
+        position: startPos,
+        dirIndex: 1,
+        pathScore: 0,
+        path: [],
+    });
+    // const opened = [
+    //     {
+    //         position: startPos,
+    //         dirIndex: 1,
+    //         pathScore: 0,
+    //         path: [],
+    //     },
+    // ];
     const endNode = map[endPos.y][endPos.x];
 
-    while (opened.length > 0) {
-        const currState = opened.pop();
+    while (!opened.isEmpty()) {
+        const currState = opened.dequeue();
         const mapNode = map[currState.position.y][currState.position.x];
 
-        if (
-            mapNode.pathScores[currState.dirIndex] < currState.pathScore ||
-            Math.min(...endNode.pathScores) < currState.pathScore
-        ) {
+        if (mapNode.pathScores[currState.dirIndex] < currState.pathScore) {
             continue;
         }
+        if (Math.min(...endNode.pathScores) < currState.pathScore) {
+            break;
+        }
+
         if (mapNode.pathScores[currState.dirIndex] === currState.pathScore) {
             mapNode.paths[currState.dirIndex].push(currState.path);
         } else {
@@ -109,14 +117,14 @@ const partOne = (inputMap) => {
             [left, right] = getLeftRight(map, stepPos, currState.dirIndex);
         }
 
-        const nextStates = [];
+        // const nextStates = [];
 
         const forwardPos = vec2d.add(stepPos, directions[currState.dirIndex]);
         if (
             map[forwardPos.y]?.[forwardPos.x] &&
             map[forwardPos.y][forwardPos.x].tile !== '#'
         ) {
-            nextStates.push({
+            opened.enqueue({
                 position: forwardPos,
                 dirIndex: currState.dirIndex,
                 pathScore: currState.pathScore + stepCount + 1,
@@ -128,7 +136,7 @@ const partOne = (inputMap) => {
         if (left && left.tile !== '#') {
             const leftDirIndex = positiveModulo(currState.dirIndex - 1, 4);
             if (stepPosNode.pathScores[leftDirIndex] >= afterTurnPathScore) {
-                nextStates.push({
+                opened.enqueue({
                     position: stepPos,
                     dirIndex: leftDirIndex,
                     pathScore: afterTurnPathScore,
@@ -139,7 +147,7 @@ const partOne = (inputMap) => {
         if (right && right.tile !== '#') {
             const rightDirIndex = positiveModulo(currState.dirIndex + 1, 4);
             if (stepPosNode.pathScores[rightDirIndex] >= afterTurnPathScore) {
-                nextStates.push({
+                opened.enqueue({
                     position: stepPos,
                     dirIndex: positiveModulo(currState.dirIndex + 1, 4),
                     pathScore: afterTurnPathScore,
@@ -147,8 +155,6 @@ const partOne = (inputMap) => {
                 });
             }
         }
-
-        opened.push(...nextStates);
     }
 
     const minScore = Math.min(...map[endPos.y][endPos.x].pathScores);
