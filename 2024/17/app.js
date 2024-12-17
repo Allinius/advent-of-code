@@ -78,7 +78,7 @@ const executeInstruction = (instructionIndex, program, registers) => {
             );
             registers[1] = Math.floor(numerator / denominator);
         case 7:
-            // bdv
+            // cdv
             numerator = registers[0];
             denominator = Math.pow(
                 2,
@@ -108,7 +108,7 @@ const partOne = (input) => {
     return outputs.join(',');
 };
 
-const partTwo = (input) => {
+const partTwoBF = (input) => {
     let result;
     let regAValue = 15560637;
     // let regAValue = 0;
@@ -168,36 +168,43 @@ const partTwo = (input) => {
     return result - 256;
 };
 
-// i gave up
-// const partTwoSolve = () => {
-//     const program = [2, 4, 1, 1, 7, 5, 1, 5, 4, 0, 0, 3, 5, 5, 3, 0];
-//     // let registerA = '';
-//     const registers = ['001', '010', '011', '100', '101', '110', '111'];
+const partTwoSolve = () => {
+    const program = [2, 4, 1, 1, 7, 5, 1, 5, 4, 0, 0, 3, 5, 5, 3, 0];
+    // let registers = ['001', '010', '011', '100', '101', '110', '111'];
+    let registers = ['100'];
 
-//     for (let i = program.length - 2; i >= 0; i--) {
-//         registers.forEach((registerA, regI) => {
-//             let paddedRegA = registerA.padStart(8, '0');
+    for (let i = program.length - 2; i >= 0; i--) {
+        let newRegisters = [];
+        registers.forEach((registerStart, regI) => {
+            possibles = [
+                '000',
+                '001',
+                '010',
+                '011',
+                '100',
+                '101',
+                '110',
+                '111',
+            ];
+            possibles.forEach((tribit) => {
+                const registerA = registerStart + tribit;
+                let paddedRegA = registerA.padStart(8, '0');
 
-//             const c = parseInt(paddedRegA.slice(0, -5), 2);
-//             const b = [0, 1, 2, 3, 4, 5, 6, 7]
-//                 .find((b) => ((b ^ c) >>> 0) % 8 === (program[i] ^ 4))
-//                 .toString(2)
-//                 .padStart(3, '0');
-
-//             registers[regI] = registerA + b;
-//         });
-//     }
-//     console.log(registers);
-//     console.log((164541160582845).toString(2));
-// };
+                const a = parseInt(paddedRegA, 2);
+                const a3x1 = parseInt(paddedRegA.slice(-3), 2) ^ 1;
+                const c = Math.floor(a / Math.pow(2, a3x1));
+                const b = (a3x1 ^ 5 ^ c) >>> 0;
+                if (b % 8 === program[i]) {
+                    newRegisters.push(registerA);
+                }
+            });
+        });
+        registers = newRegisters;
+    }
+    return Math.min(...registers.map((regBinary) => parseInt(regBinary, 2)));
+};
 
 assert.equal(partOne(inputSmall), '4,6,3,5,6,3,5,2,1,0');
 console.log(partOne(input));
-console.log(partTwo(input));
-// console.log(partTwoSolve());
-// console.log(
-//     partOne({
-//         program: input.program,
-//         registers: [partTwoSolve(), 0, 0],
-//     })
-// );
+// console.log(partTwoBF(input));
+console.log(partTwoSolve());
