@@ -19,8 +19,13 @@ const scalarMultiply = (vec, n) => {
     };
 };
 
+const manhattanDistance = (vec1, vec2) => {
+    return Math.abs(vec2.x - vec1.x) + Math.abs(vec2.y - vec1.y);
+};
+
 module.exports = {
     add,
     difference,
     scalarMultiply,
+    manhattanDistance,
 };
