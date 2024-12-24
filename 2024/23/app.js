@@ -11,6 +11,7 @@ const parseInput = (fileName) => {
 };
 
 const inputSmall = parseInput('input-small.txt');
+const input = parseInput('input.txt');
 
 const createGraph = (connections) => {
     const graph = {};
