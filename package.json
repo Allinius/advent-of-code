@@ -5,8 +5,8 @@
   "scripts": {},
   "author": "Allinius",
   "dependencies": {
-    "@datastructures-js/priority-queue": "^6.3.1",
-    "canvas": "^2.11.2",
+    "@datastructures-js/priority-queue": "^6.3.5",
+    "canvas": "^3.2.0",
     "heap": "^0.2.7"
   }
 }
