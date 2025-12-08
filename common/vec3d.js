@@ -22,6 +22,10 @@ const magnitude = (vec) => {
     return Math.sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z);
 };
 
+const distance = (vec1, vec2) => {
+    return magnitude(difference(vec1, vec2));
+};
+
 const manhattanDistance = (vec1, vec2) => {
     return (
         Math.abs(vec2.x - vec1.x) +
@@ -71,6 +75,7 @@ module.exports = {
     add,
     eq,
     magnitude,
+    distance,
     manhattanDistance,
     rotate,
 };
