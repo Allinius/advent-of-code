@@ -1,6 +1,5 @@
 const fs = require('fs');
 const assert = require('assert');
-const { distance } = require('../../common/vec3d');
 
 const parseInput = (fileName) => {
     return fs
