@@ -178,4 +178,4 @@ const placeShape = (grid, shape, startX, startY, tile) => {
 };
 
 assert.equal(partOne(inputSmall), 2);
-// console.log(partOne(input));
+console.log(partOne(input));
