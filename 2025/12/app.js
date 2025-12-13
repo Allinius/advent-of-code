@@ -54,9 +54,9 @@ const generateShapeVariations = (input) => {
         let currentShape = shapeObj.shape;
         for (let i = 0; i < 4; i++) {
             currentShape = rotateShape(currentShape);
-            addIfNotExists(variations, currentShape, shapeObj.size);
+            addIfNotExists(variations, currentShape);
             const flipped = flipShape(currentShape);
-            addIfNotExists(variations, flipped, shapeObj.size);
+            addIfNotExists(variations, flipped);
         }
         return { variations, size: shapeObj.size };
     });
@@ -90,7 +90,7 @@ const flipShape = (shape) => {
     return newShape;
 };
 
-const addIfNotExists = (variations, shape, size) => {
+const addIfNotExists = (variations, shape) => {
     for (const varShape of variations) {
         if (areShapesEqual(varShape, shape)) {
             return;
@@ -178,4 +178,4 @@ const placeShape = (grid, shape, startX, startY, tile) => {
 };
 
 assert.equal(partOne(inputSmall), 2);
-console.log(partOne(input));
+// console.log(partOne(input));
